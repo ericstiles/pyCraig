@@ -1,18 +1,11 @@
-#!/usr/bin/python
-import re
-from bs4 import BeautifulSoup as bs
 from bs4 import Tag
-from classified import Advertisement
 
 result = {'class': ['result-row']}
 banner = {'class': ['ban', 'nearby']}
 
-car_search_path = 'search/cta?query='
-motorcycle_search_path = 'search/mca?query='
-tools_search_path = 'search/tla?query='
-
-# image_url_prepend = 'https://images.craigslist.org/'
-# image_url_append = '_300x300.jpg'
+car_search_path: str = 'search/cta?query='
+motorcycle_search_path: str = 'search/mca?query='
+tools_search_path: str = 'search/tla?query='
 
 
 def get_search_query(url: str, search_path: str, query: str) -> str:

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import utils as u
 from bs4 import BeautifulSoup as bs
 

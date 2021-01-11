@@ -3,15 +3,22 @@
 Module Docstring
 """
 import argparse
+from typing import List, Any, Callable, Union
+
 import craigslist_search_results_page as results_page
 import craigslist_sites_page as sites_page
 import search_criteria as sc
 import utils as u
-import console as c
+from output import Output as o
+from output import Html as H
+from output import ConsoleOutput
+from classified import Advertisement
 
 __author__ = "Eric Stiles"
 __version__ = "0.1.0"
 __license__ = "MIT"
+
+process_parser_args: Callable[[Any], Union[List[Any], Any]] = lambda arg: [] + [arg] if type(arg) == str else [] + arg
 
 
 def map_url_to_results(url: str, search_string: str, search: str) -> list:
@@ -29,29 +36,26 @@ def map_page_to_results(page: str) -> list:
 def main(args: argparse.Namespace):
     """ Main entry point of the app """
     dict_sites = sites_page.handle(sites_page.base_url)
+    dict_outputs = {'console': ConsoleOutput(), 'html': H()}
 
-    bridge = []
-    if type(args.subdomain) == str:
-        bridge.append(args.subdomain)
-    else:
-        bridge.extend(args.subdomain)
-
-    for site in bridge:
-        # print(dict_sites[site])
+    for site in process_parser_args(args.subdomain):
         site = dict_sites[site]
-        # print(results_page.get_search_query(site, sc.car_search_path, args.data[0]))
-        results_list = map_url_to_results(site, sc.car_search_path, args.data[0])
-        c.handle(results_list)
+        results_list = list(map(lambda i: Advertisement.map_li_to_model(i), map_url_to_results(site, sc.car_search_path, args.data[0])))
+        dict_outputs[process_parser_args(args.output)[0]].handle(results_list)
 
 
 def parse() -> argparse.Namespace:
+    """
+    Parse command line arguments
+    :return:  argparse.Namespace
+    """
     default_search_domain = 'san antonio'
+    default_output = 'console'
 
     parser = argparse.ArgumentParser(description='Craigslist search.')
-    parser.add_argument("-o", "--output", help="output the results to the console")
+    parser.add_argument("-o", "--output", help="output the results to the console", nargs=1, default=default_output)
     parser.add_argument("-s", "--subdomain", help='subdomains to search', nargs='+', default=default_search_domain)
     parser.add_argument("-d", "--data", help='search values', nargs=1, default=default_search_domain, required=True)
-    # print(parser.parse_args())
     return parser.parse_args()
 
 

@@ -15,6 +15,9 @@ class Advertisement:
     def __str__(self):
         return self.title + ", " + self.price + ", " + self.link + ", " + str(self.image_list)
 
+    def __repr__(self):
+        return self.__str__()
+
     @staticmethod
     def map_li_to_model(tag: Tag) -> Advertisement:
         a = tag.find('a')
@@ -30,5 +33,4 @@ class Advertisement:
         title = tag.find('a', {'class': 'result-title hdrlnk'}).text
         r = re.search("\\d{4}", title)
         year = r.group(0) if r else ""
-        # print('year->' + year)
         return Advertisement(title, link, price, year, data_ids_list)

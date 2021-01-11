@@ -1,0 +1,17 @@
+airium
+beautifulsoup4
+certifi
+chardet
+colorama
+commonmark
+idna
+importhook
+lxml
+pip
+Pygments
+requests
+rich
+setuptools
+soupsieve
+typing-extensions
+urllib3
