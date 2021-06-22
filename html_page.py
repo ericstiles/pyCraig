@@ -20,7 +20,7 @@ def output_html(results_list: list) -> str:
 
 
 def map_advertisement_to_tag(advertisement: Advertisement, a):
-    with a.div(style="background-color:gray"):
+    with a.div(style="background-color:white"):
         with a.h3():
             a(advertisement.title)
         with a.div():
@@ -28,3 +28,6 @@ def map_advertisement_to_tag(advertisement: Advertisement, a):
         with a.div():
             with a.a(href='{}'.format(advertisement.link)):
                 a(advertisement.link)
+        if advertisement.image_list:
+            with a.div():
+                a.img(src=advertisement.image_list[0])
