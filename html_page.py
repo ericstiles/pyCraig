@@ -2,7 +2,7 @@ from airium import Airium
 from classified import Advertisement
 
 
-def output_html(results_list: list) -> str:
+def output_html(date: str, results_list: list) -> str:
     a = Airium()
     a('<!DOCTYPE html>')
     with a.html(lang="pl"):
@@ -11,6 +11,9 @@ def output_html(results_list: list) -> str:
             a.title(_t="Results")
 
         with a.body():
+            with a.div(id="date", klass='main_header'):
+                a("Found " + str(len(results_list)) + " on " + date)
+
             with a.div(id="id23409231", klass='main_header'):
                 for i in results_list:
                     map_advertisement_to_tag(i, a)

@@ -32,3 +32,27 @@ def get_souped_up_text(text) -> bs:
 
 def get_image_urls(data_ids: str, prepend: str, append: str) -> list:
     return list(map(lambda x: f"{prepend}{x}{append}", re.compile('.?:([A-Za-z0-9_]+),').findall(data_ids)))
+
+
+def reduce(results_list: list) -> list:
+    reduce_set = set()
+    for result in results_list:
+        if result.hash() not in reduce_set:
+            reduce_set.add(result.hash())
+        else:
+            results_list.remove(result)
+    results_list.sort(key=adsort)
+    return results_list
+
+
+def adsort(e):
+    return e.title;
+
+# cars = [
+#     {'car': 'Ford', 'year': 2005},
+#     {'car': 'Mitsubishi', 'year': 2000},
+#     {'car': 'BMW', 'year': 2019},
+#     {'car': 'VW', 'year': 2011}
+# ]
+#
+# cars.sort(key=myFunc)

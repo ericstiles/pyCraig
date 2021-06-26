@@ -32,7 +32,6 @@ def map_url_to_results(url: str, search_string: str, arg: {}) -> list:
     if arg.min:
         query_parameter=query_parameter + "min_auto_year=" + arg.min[0] + "&"
 
-    # print(results_page.get_search_query(url, search_string, query_parameter))
     text = u.get_html_page_text(results_page.get_search_query(url, search_string, query_parameter))
     inner_results_list = map_page_to_results(text)
     return results_page.reduce_page_results(inner_results_list)
@@ -50,13 +49,15 @@ def main(args: argparse.Namespace):
     dict_outputs = {'console': ConsoleOutput(), 'html': H()}
 
     results_list=[]
-    # for site in process_parser_args(args.subdomain):
-    for site in dict_sites:
+    search_list = [site for site in args.subdomain]
+    if len(search_list) == 0:
+        search_list = dict_sites;
+    for site in search_list:
         site = dict_sites[site.replace("_", " ")]
         results_list = results_list + list(map(lambda i: Advertisement.map_li_to_model(i),
                                                map_url_to_results(site, sc.car_search_path,
                                                                   args)))
-
+    results_list = u.reduce(results_list);
     dict_outputs[process_parser_args(args.output)[0]].handle(results_list)
 
 
@@ -65,7 +66,8 @@ def parse() -> argparse.Namespace:
     Parse command line arguments
     :return:  argparse.Namespace
     """
-    default_search_domain = 'san antonio'
+    # default_search_domain = ['san antonio']
+    default_search_domain = []
     default_output = 'console'
 
     parser = argparse.ArgumentParser(description='Craigslist search.')

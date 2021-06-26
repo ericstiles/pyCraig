@@ -5,6 +5,8 @@ from classified import Advertisement
 from rich.console import Console
 from rich.table import Table
 from rich.measure import Measurement
+from datetime import datetime
+
 import html_page
 
 
@@ -37,6 +39,7 @@ class ConsoleOutput(Output):
 
         return table
 
+
     def add_row(self, table: Table, result: Advertisement):
         table.add_row(result.price, result.year, result.title, result.link)
 
@@ -48,10 +51,12 @@ class ConsoleOutput(Output):
 class Html(Output):
     def __init__(self):
         self.value = "Html"
+        self.date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        self.datestr = self.date.replace("/", "").replace(":", "").replace(" ", ".")
+
 
     def handle(self, results_list: list):
-        # print("Not implemented: Class->" + self.value)
-        html_page.output_html(results_list)
-        f = open("output.html", "w")
-        f.write(html_page.output_html(results_list))
+        html_page.output_html(self.date, results_list)
+        f = open("output_" + self.datestr + ".html", "w")
+        f.write(html_page.output_html(self.date, results_list))
         f.close()
