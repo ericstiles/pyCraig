@@ -1,17 +1,17 @@
-airium
-beautifulsoup4
-certifi
-chardet
-colorama
-commonmark
-idna
-importhook
+airium == 0.2.2
+beautifulsoup4 == 4.9.3
+certifi == 2020.12.5
+chardet == 4.0.0
+colorama == 0.4.4
+commonmark == 0.9.1
+idna == 2.10
+importhook 
 lxml
 pip
-Pygments
-requests
-rich
-setuptools
-soupsieve
-typing-extensions
-urllib3
+Pygments == 2.9.0
+requests == 2.25.1
+setuptools == 51.1.1
+soupsieve == 2.2.1
+typing-extensions == 3.7.4.3
+urllib3 == 1.26.4
+rich == 10.4.0
