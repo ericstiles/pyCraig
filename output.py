@@ -55,8 +55,5 @@ class Html(Output):
         self.datestr = self.date.replace("/", "").replace(":", "").replace(" ", ".")
 
 
-    def handle(self, results_list: list):
-        html_page.output_html(self.date, results_list)
-        f = open("/home/pi/repo/pyCraigSupport/output_" + self.datestr + ".html", "w")
-        f.write(html_page.output_html(self.date, results_list))
-        f.close()
+    def handle(self, results_list: list) -> str:
+        return html_page.output_html(self.date, results_list)

@@ -2,6 +2,7 @@
 import re
 import requests as req
 from bs4 import BeautifulSoup as bs
+from datetime import datetime
 
 image_url_prepend = 'https://images.craigslist.org/'
 image_url_append = '_300x300.jpg'
@@ -48,11 +49,5 @@ def reduce(results_list: list) -> list:
 def adsort(e):
     return e.title;
 
-# cars = [
-#     {'car': 'Ford', 'year': 2005},
-#     {'car': 'Mitsubishi', 'year': 2000},
-#     {'car': 'BMW', 'year': 2019},
-#     {'car': 'VW', 'year': 2011}
-# ]
-#
-# cars.sort(key=myFunc)
+def get_post_pend_date() -> str:
+    return datetime.now().strftime("%d/%m/%Y %H:%M:%S").replace("/", "").replace(":", "").replace(" ", ".")

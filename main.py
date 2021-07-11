@@ -58,7 +58,7 @@ def main(args: argparse.Namespace):
                                                map_url_to_results(site, sc.car_search_path,
                                                                   args)))
     results_list = u.reduce(results_list);
-    dict_outputs[process_parser_args(args.output)[0]].handle(results_list)
+    print (dict_outputs[process_parser_args(args.output)[0]].handle(results_list))
 
 
 def parse() -> argparse.Namespace:
