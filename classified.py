@@ -20,7 +20,8 @@ class Advertisement:
         return self.__str__()
 
     def hash(self):
-        return self.title + ", " + self.price + ", " + str(len(self.image_list))
+        return self.title + ", " + self.price + ", " + (self.image_list[0] if len(self.image_list) > 0 else "no images")
+        # return self.title + ", " + self.price + ", " + str(len(self.image_list))
 
     @staticmethod
     def map_li_to_model(tag: Tag) -> Advertisement:

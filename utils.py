@@ -49,5 +49,6 @@ def reduce(results_list: list) -> list:
 def adsort(e):
     return e.title;
 
+
 def get_post_pend_date() -> str:
     return datetime.now().strftime("%d/%m/%Y %H:%M:%S").replace("/", "").replace(":", "").replace(" ", ".")
