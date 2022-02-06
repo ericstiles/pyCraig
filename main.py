@@ -14,13 +14,41 @@ from output import Html as H
 from output import ConsoleOutput
 from classified import Advertisement
 
+import sys
+
 __author__ = "Eric Stiles"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
+def list_domains(args: argparse.Namespace):
+    print ("list_domains")
+    print (args)
+    dict_sites = sites_page.handle(sites_page.base_url)
+    for site in dict_sites:
+        # Could be a a list of words to check
+        if (args.filter is not None and args.filter[0] in site) or args.filter is None:
+            print (site + " : " + dict_sites[site.replace("_", " ")])
+
+def search(args: argparse.Namespace):
+    print ("search")
+    dict_sites = sites_page.handle(sites_page.base_url)
+    dict_outputs = {'console': ConsoleOutput(), 'html': H()}
+
+    results_list=[]
+    search_list = [site for site in args.subdomain]
+    if len(search_list) == 0:
+        search_list = dict_sites;
+    for site in search_list:
+        site = dict_sites[site.replace("_", " ")]
+        results_list = results_list + list(map(lambda i: Advertisement.map_li_to_model(i),
+                                               map_url_to_results(site, sc.search[args.category[0]],
+                                                                  args)))
+    results_list = u.reduce(results_list);
+    print (dict_outputs[process_parser_args(args.output)[0]].handle(results_list))
+
+
 process_parser_args: Callable[[Any], Union[List[Any], Any]] = \
     lambda arg: [] + [arg] if type(arg) == str else [] + arg
-
 
 def map_url_to_results(url: str, search_string: str, arg: {}) -> list:
 
@@ -42,43 +70,38 @@ def map_page_to_results(page: str) -> list:
     inner_results_list = soup.find_all(results_page.tag_filter)
     return results_page.reduce_page_results(inner_results_list)
 
-
-def main(args: argparse.Namespace):
-    """ Main entry point of the app """
-    dict_sites = sites_page.handle(sites_page.base_url)
-    dict_outputs = {'console': ConsoleOutput(), 'html': H()}
-
-    results_list=[]
-    search_list = [site for site in args.subdomain]
-    if len(search_list) == 0:
-        search_list = dict_sites;
-    for site in search_list:
-        site = dict_sites[site.replace("_", " ")]
-        results_list = results_list + list(map(lambda i: Advertisement.map_li_to_model(i),
-                                               map_url_to_results(site, sc.car_search_path,
-                                                                  args)))
-    results_list = u.reduce(results_list);
-    print (dict_outputs[process_parser_args(args.output)[0]].handle(results_list))
-
-
-def parse() -> argparse.Namespace:
+def process():
     """
     Parse command line arguments
     :return:  argparse.Namespace
     """
-    # default_search_domain = ['san antonio']
     default_search_domain = []
     default_output = 'console'
 
-    parser = argparse.ArgumentParser(description='Craigslist search.')
-    parser.add_argument("-o", "--output", help="output the results to the console", nargs=1, default=default_output)
-    parser.add_argument("-s", "--subdomain", help='subdomains to search', nargs='+', default=default_search_domain)
-    parser.add_argument("-d", "--data", help='search values', nargs=1, default=default_search_domain, required=True)
-    parser.add_argument("-a", "--max", help='max year', nargs=1, required=False)
-    parser.add_argument("-i", "--min", help='min year', nargs=1, required=False)
-    return parser.parse_args()
+    parser = argparse.ArgumentParser(description='Craigslist search')
 
+    sub_parsers = parser.add_subparsers(help='sub-commmand help')
+
+    parser_list = sub_parsers.add_parser('list', help='list is cool sub-command')
+    parser_list.add_argument("-f", "--filter", help='filter sites in list', nargs=1)
+    parser_list.set_defaults(func=list_domains)
+
+    parser_search = sub_parsers.add_parser('search', help='list is cool sub-command')
+    parser_search.add_argument("-o", "--output", help="output the results to the console [output, html]", nargs=1, default=default_output)
+    parser_search.add_argument("-s", "--subdomain", help='subdomains to search', nargs='+', default=default_search_domain)
+    parser_search.add_argument("-d", "--data", help='search values', nargs=1, default=default_search_domain, required=True)
+    parser_search.add_argument("-a", "--max", help='max year, specific to car search', nargs=1, required=False)
+    parser_search.add_argument("-i", "--min", help='min year, specific to car search', nargs=1, required=False)
+    parser_search.add_argument("-c", "--category", help='category to search in [cars, electronics, motorcycles, tools]', nargs=1, required=False)
+    parser_search.set_defaults(func=search)
+
+    if len(sys.argv)==1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
+    args =  parser.parse_args()
+    args.func(args)
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
-    main(parse())
+    process()
