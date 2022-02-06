@@ -87,6 +87,124 @@ optional arguments:
                         category to search in [cars, electronics, motorcycles, tools]
 
 ```
+## Example 1
+
+Default is console output
+
+```
+$ ./main.py search -d html -c electronics -s "san antonio"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+┃ Price                                                                     ┃ Year                           ┃ Title                                                                                             
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+│ $120                                                                      │                                │ Bose Frames Tenor Sunglasses                                                                      
+│ $175                                                                      │                                │ Ikegami HC-D57W / CA-450 Camcorder Recorder Camera                                                
+└───────────────────────────────────────────────────────────────────────────┴────────────────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────
+```
+
+### Example 2
+
+Output is html that can be piped to a file
+
+```
+$ ./main.py search -d bowers -c electronics -s "san antonio" -o html
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Results</title>
+  </head>
+  <body>
+    <div id="date" class="main_header">
+      Found 5 on 06/02/2022 17:29:14
+    </div>
+    <div id="id23409231" class="main_header">
+      <div style="background-color:white">
+        <h3>
+          BOWERS & WILKINS M1
+        </h3>
+        <div>
+          $99
+        </div>
+        <div>
+          <a href="https://sanantonio.craigslist.org/ele/d/san-antonio-bowers-wilkins-m1/7436646308.html">
+            https://sanantonio.craigslist.org/ele/d/san-antonio-bowers-wilkins-m1/7436646308.html
+          </a>
+        </div>
+        <div>
+          <img src="https://images.craigslist.org/01010_lYy72Xml2Xiz_0CI0t2_300x300.jpg" />
+        </div>
+      </div>
+      <div style="background-color:white">
+        <h3>
+          BOWERS & WILKINS Zeppelin Mini/Bluetooth
+        </h3>
+        <div>
+          $99
+        </div>
+        <div>
+          <a href="https://sanantonio.craigslist.org/ele/d/san-antonio-bowers-wilkins-zeppelin/7440201603.html">
+            https://sanantonio.craigslist.org/ele/d/san-antonio-bowers-wilkins-zeppelin/7440201603.html
+          </a>
+        </div>
+        <div>
+          <img src="https://images.craigslist.org/00Y0Y_ghpYZTYx37Qz_0t20CI_300x300.jpg" />
+        </div>
+      </div>
+      <div style="background-color:white">
+        <h3>
+          Fyne Audio F703 High End Speakers
+        </h3>
+        <div>
+          $11,500
+        </div>
+        <div>
+          <a href="https://sanantonio.craigslist.org/ele/d/seguin-fyne-audio-f703-high-end-speakers/7438236914.html">
+            https://sanantonio.craigslist.org/ele/d/seguin-fyne-audio-f703-high-end-speakers/7438236914.html
+          </a>
+        </div>
+        <div>
+          <img src="https://images.craigslist.org/00D0D_kl7m1Kowujoz_0t20CI_300x300.jpg" />
+        </div>
+      </div>
+      <div style="background-color:white">
+        <h3>
+          M&K Sound S300 Monitor speakers
+        </h3>
+        <div>
+          $4,700
+        </div>
+        <div>
+          <a href="https://sanantonio.craigslist.org/ele/d/seguin-mk-sound-s300-monitor-speakers/7429796070.html">
+            https://sanantonio.craigslist.org/ele/d/seguin-mk-sound-s300-monitor-speakers/7429796070.html
+          </a>
+        </div>
+        <div>
+          <img src="https://images.craigslist.org/00101_braHWVHNwv0z_0t20CI_300x300.jpg" />
+        </div>
+      </div>
+      <div style="background-color:white">
+        <h3>
+          RARE Home Speakers
+        </h3>
+        <div>
+          $5,000
+        </div>
+        <div>
+          <a href="https://sanantonio.craigslist.org/ele/d/san-antonio-rare-home-speakers/7425856898.html">
+            https://sanantonio.craigslist.org/ele/d/san-antonio-rare-home-speakers/7425856898.html
+          </a>
+        </div>
+        <div>
+          <img src="https://images.craigslist.org/00z0z_ihdCyUxu1ZGz_0CI0CI_300x300.jpg" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+```
+
 
 # example request to match
 ```

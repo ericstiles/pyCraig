@@ -34,7 +34,8 @@ class ConsoleOutput(Output):
         for i in results_list:
             self.add_row(table, i)
 
-        table.width =  Measurement.get(console, table, console.width).maximum if len(table.rows) > 0 else 800
+        # table.width =  Measurement.get(console, table, console.width).maximum if len(table.rows) > 0 else 800
+        table.width = 800
 
         return table
 

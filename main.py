@@ -21,8 +21,6 @@ __version__ = "0.1.0"
 __license__ = "MIT"
 
 def list_domains(args: argparse.Namespace):
-    print ("list_domains")
-    print (args)
     dict_sites = sites_page.handle(sites_page.base_url)
     for site in dict_sites:
         # Could be a a list of words to check
@@ -30,7 +28,6 @@ def list_domains(args: argparse.Namespace):
             print (site + " : " + dict_sites[site.replace("_", " ")])
 
 def search(args: argparse.Namespace):
-    print ("search")
     dict_sites = sites_page.handle(sites_page.base_url)
     dict_outputs = {'console': ConsoleOutput(), 'html': H()}
 
