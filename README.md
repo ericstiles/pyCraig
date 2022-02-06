@@ -18,7 +18,7 @@ optional arguments:
 -h, --help     show this help message and exit
 ```
 
-#list
+# list
 
 The generated list of all sub-domains based on sites in the craigslist [`about/sites` ](https://www.craigslist.org/about/sites) page.
 
@@ -43,7 +43,7 @@ florence / muscle shoals : https://shoals.craigslist.org/
 ...
 ```
 
-##filter
+## filter
 
 The filter will check the text of the url link in the `about/sites` page to find a specific domain. This sub-command and filter helps to determine which sub-domains to use for two word or slash combinations.
 
@@ -66,7 +66,7 @@ fort dodge : https://fortdodge.craigslist.org/
 dallas / fort worth : https://dallas.craigslist.org/
 ```
 
-#search
+# search
 
 Search across all or a given set of sub-domains in a specific search category
 
@@ -88,7 +88,7 @@ optional arguments:
 
 ```
 
-#example request to match
+# example request to match
 ```
 https://austin.craigslist.org/d/cars-trucks/search/cta?auto_make_model=dodge%20charger&max_auto_year=1970&min_auto_year=1968&query=dodge
 ```
