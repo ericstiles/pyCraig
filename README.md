@@ -1,3 +1,5 @@
+A command line tool in python to search across craigslist
+
 # main
 
 There are no core arguments
