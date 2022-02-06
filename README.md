@@ -70,7 +70,7 @@ dallas / fort worth : https://dallas.craigslist.org/
 
 Search across all or a given set of sub-domains in a specific search category
 
-```aidl
+```
 $ ./main.py search -h
 usage: main.py search [-h] [-o OUTPUT] [-s SUBDOMAIN [SUBDOMAIN ...]] -d DATA [-a MAX] [-i MIN] [-c CATEGORY] [-l LIST]
 
