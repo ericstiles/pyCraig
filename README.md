@@ -168,38 +168,6 @@ $ ./main.py search -d bowers -c electronics -s "san antonio" -o html
           <img src="https://images.craigslist.org/00D0D_kl7m1Kowujoz_0t20CI_300x300.jpg" />
         </div>
       </div>
-      <div style="background-color:white">
-        <h3>
-          M&K Sound S300 Monitor speakers
-        </h3>
-        <div>
-          $4,700
-        </div>
-        <div>
-          <a href="https://sanantonio.craigslist.org/ele/d/seguin-mk-sound-s300-monitor-speakers/7429796070.html">
-            https://sanantonio.craigslist.org/ele/d/seguin-mk-sound-s300-monitor-speakers/7429796070.html
-          </a>
-        </div>
-        <div>
-          <img src="https://images.craigslist.org/00101_braHWVHNwv0z_0t20CI_300x300.jpg" />
-        </div>
-      </div>
-      <div style="background-color:white">
-        <h3>
-          RARE Home Speakers
-        </h3>
-        <div>
-          $5,000
-        </div>
-        <div>
-          <a href="https://sanantonio.craigslist.org/ele/d/san-antonio-rare-home-speakers/7425856898.html">
-            https://sanantonio.craigslist.org/ele/d/san-antonio-rare-home-speakers/7425856898.html
-          </a>
-        </div>
-        <div>
-          <img src="https://images.craigslist.org/00z0z_ihdCyUxu1ZGz_0CI0CI_300x300.jpg" />
-        </div>
-      </div>
     </div>
   </body>
 </html>
@@ -212,3 +180,9 @@ $ ./main.py search -d bowers -c electronics -s "san antonio" -o html
 ```
 https://austin.craigslist.org/d/cars-trucks/search/cta?auto_make_model=dodge%20charger&max_auto_year=1970&min_auto_year=1968&query=dodge
 ```
+
+# Next Steps
+
+- Split out the search refinements for different areas
+- Add additional categories to search in
+- Filter subdomains to include by State
