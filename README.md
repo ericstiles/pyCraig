@@ -5,19 +5,21 @@ A command line tool in python to search across craigslist
 There are no core arguments
 
 ```
-$ main.py
-
-usage: main.py [-h] {list,search} ...
+$ ./main.py -h
+usage: main.py [-h] {list,list-state,search} ...
 
 Craigslist search
 
 positional arguments:
-{list,search}  sub-commmand help
-list         list the sub-domains searched in craigslist
-search       search sub-domains given the relevant search criteria
+  {list,list-state,search}
+                        sub-commmand help
+    list                list subdomains
+    list-state          list sub domains by state
+    search              search for products
 
 optional arguments:
--h, --help     show this help message and exit
+  -h, --help            show this help message and exit
+
 ```
 
 # list
@@ -73,8 +75,8 @@ dallas / fort worth : https://dallas.craigslist.org/
 Search across all or a given set of sub-domains in a specific search category
 
 ```
-$ ./main.py search -h
-usage: main.py search [-h] [-o OUTPUT] [-s SUBDOMAIN [SUBDOMAIN ...]] -d DATA [-a MAX] [-i MIN] [-c CATEGORY] [-l LIST]
+$ ./main.py search  -h
+usage: main.py search [-h] [-o OUTPUT] [-s SUBDOMAIN [SUBDOMAIN ...]] [-t STATE [STATE ...]] -d DATA [-a MAX] [-i MIN] [-c CATEGORY]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -82,6 +84,8 @@ optional arguments:
                         output the results to the console [output, html]
   -s SUBDOMAIN [SUBDOMAIN ...], --subdomain SUBDOMAIN [SUBDOMAIN ...]
                         subdomains to search
+  -t STATE [STATE ...], --state STATE [STATE ...]
+                        state subdomains
   -d DATA, --data DATA  search values
   -a MAX, --max MAX     max year, specific to car search
   -i MIN, --min MIN     min year, specific to car search
@@ -94,7 +98,7 @@ optional arguments:
 Default is console output
 
 ```
-$ ./main.py search -d html -c electronics -s "san antonio"
+$ ./main.py search -d html -c electronics -s "san antonio" houston
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ┃ Price                                                                     ┃ Year                           ┃ Title                                                                                             
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -181,8 +185,7 @@ $ ./main.py search -d bowers -c electronics -s "san antonio" -o html
 https://austin.craigslist.org/d/cars-trucks/search/cta?auto_make_model=dodge%20charger&max_auto_year=1970&min_auto_year=1968&query=dodge
 ```
 
-# Next Steps
+# next Steps
 
 - Split out the search refinements for different areas
 - Add additional categories to search in
-- Filter subdomains to include by State

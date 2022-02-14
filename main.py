@@ -20,6 +20,11 @@ __author__ = "Eric Stiles"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
+def list_domains_by_state(args: argparse.Namespace):
+    dict_sites = sites_page.handle_sites_by_state(sites_page.base_url)
+    for i in dict_sites[args.state]:
+        print (i)
+
 def list_domains(args: argparse.Namespace):
     dict_sites = sites_page.handle(sites_page.base_url)
     for site in dict_sites:
@@ -33,9 +38,15 @@ def search(args: argparse.Namespace):
 
     results_list=[]
     search_list = [site for site in args.subdomain]
+    if args.state is not None:
+        state_dict_sites = sites_page.handle_sites_by_state(sites_page.base_url)
+        for i in args.state:
+            for j in state_dict_sites[i]:
+                search_list.extend(j.keys())
+
     if len(search_list) == 0:
         search_list = dict_sites;
-    for site in search_list:
+    for site in set(search_list):
         site = dict_sites[site.replace("_", " ")]
         results_list = results_list + list(map(lambda i: Advertisement.map_li_to_model(i),
                                                map_url_to_results(site, sc.search[args.category[0]],
@@ -79,13 +90,18 @@ def process():
 
     sub_parsers = parser.add_subparsers(help='sub-commmand help')
 
-    parser_list = sub_parsers.add_parser('list', help='list is cool sub-command')
+    parser_list = sub_parsers.add_parser('list', help='list subdomains')
     parser_list.add_argument("-f", "--filter", help='filter sites in list', nargs=1)
     parser_list.set_defaults(func=list_domains)
 
-    parser_search = sub_parsers.add_parser('search', help='list is cool sub-command')
+    parser_list_state = sub_parsers.add_parser('list-state', help='list sub domains by state')
+    parser_list_state.add_argument("-t", "--state", help='state to show (required)', nargs=1)
+    parser_list_state.set_defaults(func=list_domains_by_state)
+
+    parser_search = sub_parsers.add_parser('search', help='search for products')
     parser_search.add_argument("-o", "--output", help="output the results to the console [output, html]", nargs=1, default=default_output)
     parser_search.add_argument("-s", "--subdomain", help='subdomains to search', nargs='+', default=default_search_domain)
+    parser_search.add_argument("-t", "--state", help='state subdomains', nargs='+')
     parser_search.add_argument("-d", "--data", help='search values', nargs=1, default=default_search_domain, required=True)
     parser_search.add_argument("-a", "--max", help='max year, specific to car search', nargs=1, required=False)
     parser_search.add_argument("-i", "--min", help='min year, specific to car search', nargs=1, required=False)

@@ -3,11 +3,6 @@ from bs4 import Tag
 result = {'class': ['result-row']}
 banner = {'class': ['ban', 'nearby']}
 
-car_search_path: str = 'search/cta?query='
-motorcycle_search_path: str = 'search/mca?query='
-tools_search_path: str = 'search/tla?query='
-
-
 def get_search_query(url: str, search_path: str, query: str) -> str:
     """
 
