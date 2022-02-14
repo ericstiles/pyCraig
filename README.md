@@ -16,7 +16,7 @@ positional arguments:
   {list,list-state,search}
                         sub-commmand help
     list                list subdomains
-    list-state          list sub domains by state
+    list-state          list subdomains by state
     search              search for products
 
 optional arguments:
