@@ -1,4 +1,6 @@
-A command line tool in python to search across craigslist
+A command line tool in python to search across craigslist.
+
+How do I use this tool:  I've set up cron jobs to run specific searches that pipe results to an html page in nginx (on a raspberry pi). Then I can go to those pages and click through results.  Used this for searching for cars across the US and electronic components on a state or local level.
 
 # main
 
